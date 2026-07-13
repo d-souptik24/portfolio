@@ -197,7 +197,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statusEl) statusEl.setAttribute('aria-live','polite');
     const submitBtn = document.getElementById('submitBtn');
     
+    let statusTimeout;
+    
     if (form && statusEl && submitBtn) {
+        const showStatus = (msg, color, duration = 4000) => {
+            statusEl.textContent = msg;
+            statusEl.style.color = color;
+            clearTimeout(statusTimeout);
+            if (duration > 0) {
+                statusTimeout = setTimeout(() => {
+                    statusEl.textContent = '';
+                }, duration);
+            }
+        };
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -206,34 +219,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = formData.get('email')?.trim();
             const message = formData.get('message')?.trim();
             
-            // Enhanced validation with XSS prevention
-            statusEl.style.color = 'var(--color-text-soft)';
-            
             // Check for suspicious patterns
             const suspiciousPatterns = /<script|javascript:|data:|vbscript:|onload=|onerror=/i;
             if (suspiciousPatterns.test(name + email + message)) {
-                statusEl.textContent = "Invalid characters detected. Please remove any script tags or suspicious content.";
-                statusEl.style.color = '#dc2626';
+                showStatus("Invalid characters detected. Please remove any script tags or suspicious content.", '#dc2626');
                 return;
             }
             
             if (!name || !email || !message || message.length < 10) {
-                statusEl.textContent = "Please complete required fields with a valid message (≥ 10 chars).";
-                statusEl.style.color = '#dc2626';
+                showStatus("Please complete required fields with a valid message (≥ 10 chars).", '#dc2626');
                 return;
             }
             
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                statusEl.textContent = "Please enter a valid email address.";
-                statusEl.style.color = '#dc2626';
+                showStatus("Please enter a valid email address.", '#dc2626');
                 return;
             }
             
             // Show loading state
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
-            statusEl.textContent = "Sending your message...";
-            statusEl.style.color = 'var(--color-accent)';
+            showStatus("Sending your message...", 'var(--color-accent)', 0); // 0 means don't auto-fade while sending
             
             try {
                 // Submit to Web3Forms
@@ -245,8 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 
                 if (result.success) {
-                    statusEl.textContent = "✅ Message sent successfully! I'll get back to you soon.";
-                    statusEl.style.color = '#10b981';
+                    showStatus("✅ Message sent successfully! I'll get back to you soon.", '#10b981', 5000);
                     form.reset();
                 } else {
                     throw new Error(result.message || 'Form submission failed');
@@ -254,8 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             } catch (error) {
                 console.error('Form submission error:', error);
-                statusEl.textContent = "❌ Failed to send message. Please try again or email me directly at duttasouptik0@gmail.com";
-                statusEl.style.color = '#dc2626';
+                showStatus("❌ Failed to send message. Please try again or email me directly at duttasouptik0@gmail.com", '#dc2626', 6000);
             } finally {
                 // Reset button
                 setTimeout(() => {
