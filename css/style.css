@@ -1,0 +1,2457 @@
+/* ==========================================================================
+   Souptik Dutta — Portfolio Stylesheet
+   ==========================================================================
+
+   TABLE OF CONTENTS
+   --------------------------------------------------------------------------
+   1. Design Tokens (Custom Properties)
+   2. Reset & Base
+   3. Typography
+   4. Links
+   5. Utilities
+   6. Buttons
+   7. Header / Navigation
+   8. Mobile Navigation
+   9. Sections (shared)
+   10. Hero
+   11. About
+   12. Skills
+   13. Projects
+   14. Timeline (Education)
+   15. Contact & Form
+   16. Footer
+   17. Back-to-Top Button
+   18. Reveal Animations
+   19. Dialog / Modal
+   20. Accessibility (Reduced Motion)
+   21. Responsive Breakpoints
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS
+   --------------------------------------------------------------------------
+   Light mode  ->  Anthropic design language (warm parchment, editorial serif,
+                   clay accent, tonal surface elevation, no shadows)
+   Dark mode   ->  Dala design language (pure black void, violet accent,
+                   amber highlight, ultra-light type, no shadows)
+   -------------------------------------------------------------------------- */
+:root {
+  /* --- Accent & Interactive Colors --- */
+  --color-accent: #d97757; /* Anthropic Clay — primary CTA */
+  --color-accent-rgb: 217, 119, 87;
+  --color-accent-hover: #c6613f; /* Anthropic Clay Deep — hover/pressed */
+
+  /* --- Surfaces --- */
+  --color-bg: #f0eee6; /* Anthropic Ivory Medium — page canvas */
+  --color-bg-alt: #e3dacc; /* Anthropic Oat Warm — deeper parchment */
+  --color-surface: #faf9f5; /* Anthropic Ivory Light — cards */
+  --color-surface-featured: #f5e3c7; /* Anthropic Manilla — featured areas */
+
+  /* --- Text --- */
+  --color-text: #141413; /* Anthropic Slate Dark — near-black warm */
+  --color-text-soft: #6b6860; /* Anthropic Warm Grey — muted but legible text */
+
+  /* --- Borders --- */
+  --color-border: #cccbc8; /* Anthropic Stone — hairline borders */
+
+  /* --- Font Families --- */
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-ui: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* --- Border Radius --- */
+  --radius-sm: 8px; /* Anthropic buttons (bottom-only) */
+  --radius-md: 12px; /* Anthropic outlined buttons */
+  --radius-lg: 24px; /* Anthropic cards */
+  --radius-pill: 9999px;
+
+  /* --- Transitions --- */
+  --transition-base: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Layout --- */
+  --nav-height: 64px;
+}
+
+/* Dark mode — Dala design language */
+[data-theme="dark"] {
+  /* --- Accent & Interactive Colors --- */
+  --color-accent: #8052ff; /* Dala Electric Iris — primary action */
+  --color-accent-rgb: 128, 82, 255;
+  --color-accent-hover: #6a3de8; /* Darker violet for hover */
+
+  /* --- Surfaces --- */
+  --color-bg: #000000; /* Dala Void Canvas — pure black */
+  --color-bg-alt: #0a0a0a; /* Slightly lifted void */
+  --color-surface: #111111; /* Near-void for cards needing distinction */
+  --color-surface-featured: #0d0d0d; /* Near-void for featured areas */
+
+  /* --- Text --- */
+  --color-text: #ffffff; /* Dala Bone White — primary text */
+  --color-text-soft: #9a9a9a; /* Dala Ash Gray — secondary text */
+
+  /* --- Borders --- */
+  --color-border: rgba(255, 255, 255, 0.08); /* Ultra-subtle on void */
+
+  /* --- Dark-only accent --- */
+  --color-saffron: #ffb829; /* Dala Saffron Spark — amber highlight */
+
+  /* --- n8n Design Tokens (For About -> Education) --- */
+  --color-n8n-void: #0e0918;
+  --color-n8n-surface: #1a1624;
+  --color-n8n-surface-hover: #2c2834;
+  --shadow-n8n-inset:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 0 0 rgba(255, 142, 93, 0.3);
+  --shadow-n8n-inset-hover:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 0 0 rgba(255, 142, 93, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-display); /* Serif body — Anthropic convention */
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  font-size: 18px;
+  font-weight: 400;
+  overflow-x: hidden;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Dark mode: switch body to ultra-light Inter (Dala convention) */
+[data-theme="dark"] body {
+  font-family: var(--font-ui);
+  font-weight: 200;
+  background: var(--color-bg);
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+
+/* Headings use sans-serif (UI font) in both modes */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw + 0.5rem, 3.8rem);
+}
+h2 {
+  font-size: clamp(1.9rem, 3.5vw + 0.3rem, 2.4rem);
+}
+h3 {
+  font-size: clamp(1.2rem, 2vw + 0.3rem, 1.6rem);
+}
+
+/* Body text: serif at 400 in light, ultra-light sans in dark */
+p,
+li {
+  font-weight: 400;
+  font-size: 1rem;
+}
+[data-theme="dark"] p,
+[data-theme="dark"] li {
+  font-weight: 200;
+  font-family: var(--font-ui);
+}
+
+/* Dark h1: aggressive negative tracking per Dala 78px token */
+[data-theme="dark"] h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: -0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   4. LINKS
+   -------------------------------------------------------------------------- */
+
+/* Light (Anthropic): persistent underline — editorial print convention */
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  position: relative;
+  transition:
+    color var(--transition-base),
+    opacity var(--transition-base);
+}
+a:hover,
+a:focus-visible {
+  opacity: 0.7;
+}
+
+/* Dark (Dala): ghost text — no underline */
+[data-theme="dark"] a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+[data-theme="dark"] a:hover,
+[data-theme="dark"] a:focus-visible {
+  color: var(--color-text-soft);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. UTILITIES
+   -------------------------------------------------------------------------- */
+.container {
+  width: min(1280px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3.5vw, 2.5rem);
+}
+.center {
+  text-align: center;
+}
+
+/* gradient-text class now renders as flat color — no gradient */
+.gradient-text {
+  color: var(--color-text);
+  background: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS
+   -------------------------------------------------------------------------- */
+
+/* Primary filled button */
+.btn {
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  line-height: 1.1;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-base);
+
+  /* Light (Anthropic): signature bottom-only border radius */
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+/* Dark (Dala): full pill shape */
+[data-theme="dark"] .btn {
+  border-radius: var(--radius-lg);
+}
+
+.btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn:active {
+  background: var(--color-accent-hover);
+  transform: scale(0.97);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Outlined / secondary button */
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  border-radius: var(--radius-md);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  opacity: 1;
+}
+
+.btn-outline:active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  transform: scale(0.97);
+}
+
+/* Dark outlined: fill with accent on hover */
+[data-theme="dark"] .btn-outline {
+  border-radius: var(--radius-lg);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+[data-theme="dark"] .btn-outline:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* Small button variant */
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.65rem 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. HEADER / NAVIGATION
+   -------------------------------------------------------------------------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(240, 238, 230, 0.85); /* Translucent warm parchment */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02); /* Subtle separation shadow */
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+
+/* Dark: frosted glass header to prevent text overlap while remaining stylish */
+[data-theme="dark"] header {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: var(--nav-height);
+  gap: 2rem;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  color: var(--color-text);
+}
+.branding:hover {
+  opacity: 0.8;
+}
+
+.branding img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.branding img:hover {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.nav-bar > nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: clamp(0.5rem, 1vw + 0.3rem, 1.5rem);
+  padding: 0;
+  margin: 0;
+}
+.nav-links a {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  opacity: 1;
+}
+
+/* Dark nav links: slightly larger */
+[data-theme="dark"] .nav-links a {
+  font-size: 0.875rem;
+}
+
+.theme-toggle {
+  margin-left: 1rem;
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+.theme-toggle:hover {
+  background: var(--color-surface);
+  border-color: var(--color-accent);
+}
+.theme-toggle i {
+  font-size: 1rem;
+  color: inherit;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   8. MOBILE NAVIGATION
+   -------------------------------------------------------------------------- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color var(--transition-base);
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  transition: var(--transition-base);
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: var(--nav-height) 0 auto 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem clamp(1rem, 5vw, 3rem) 2rem;
+  gap: 0.75rem;
+  transform: translateY(-10%);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-base);
+}
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-menu a {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+.mobile-menu a:hover {
+  background: var(--color-bg-alt);
+  opacity: 1;
+}
+
+/* Dark mobile menu */
+[data-theme="dark"] .mobile-menu {
+  background: var(--color-bg);
+  border-bottom: none;
+}
+[data-theme="dark"] .mobile-menu a {
+  background: transparent;
+  border-color: transparent;
+}
+[data-theme="dark"] .mobile-menu a:hover {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   9. SECTIONS (SHARED)
+   -------------------------------------------------------------------------- */
+section {
+  position: relative;
+  padding: clamp(5rem, 12vh, 8rem) 0;
+}
+.section-intro {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.section-title {
+  font-size: clamp(1.9rem, 3.5vw + 0.3rem, 2.4rem);
+  margin: 0 0 1rem;
+  display: inline-block;
+  /* No ::after underline — both design systems use pure typographic composition */
+}
+.muted {
+  color: var(--color-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   10. HERO
+   -------------------------------------------------------------------------- */
+#hero {
+  min-height: auto;
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: 4rem;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Let mouse events pass through to #hero */
+  display: none;
+}
+[data-theme="dark"] #hero-canvas {
+  display: block;
+}
+
+[data-theme="dark"] #hero {
+  background: var(--color-bg);
+}
+
+.hero-grid {
+  display: grid;
+  gap: clamp(2rem, 6vw, 4rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-text {
+  animation: fade-slide 0.9s 0.1s both;
+}
+
+.hero-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1rem + 0.5vw, 1.2rem);
+  color: var(--color-text);
+  max-width: 640px;
+  margin: 1.2rem 0 2rem;
+  font-weight: 400;
+}
+
+[data-theme="dark"] .hero-lead {
+  font-family: var(--font-ui);
+  font-weight: 200;
+  color: var(--color-text);
+}
+
+.typing {
+  font-weight: 600;
+  color: var(--color-accent);
+  position: relative;
+}
+[data-theme="dark"] .typing {
+  font-weight: 400;
+}
+
+.typing::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 1em;
+  background: var(--color-accent);
+  right: -4px;
+  top: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. ABOUT
+   -------------------------------------------------------------------------- */
+#about .about-wrap {
+  display: grid;
+  gap: clamp(2rem, 4.5vw, 4rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+.about-card {
+  background: var(--color-surface);
+  padding: clamp(1.75rem, 2.2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark: about card floats on void */
+[data-theme="dark"] .about-card {
+  background: transparent;
+  border: none;
+}
+
+.about-img-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 100%;
+}
+.about-img-frame picture {
+  display: contents;
+}
+.about-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease;
+}
+.about-img-frame:hover img {
+  transform: scale(1.04);
+}
+
+.about-text {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: var(--font-display);
+}
+[data-theme="dark"] .about-text {
+  font-family: var(--font-ui);
+  font-weight: 200;
+  font-size: 0.95rem;
+}
+
+.about-text-sm {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-family: var(--font-display);
+}
+[data-theme="dark"] .about-text-sm {
+  font-family: var(--font-ui);
+  font-weight: 200;
+}
+
+.about-interests {
+  margin: 0.8rem 0;
+}
+.about-interests h4 {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-family: var(--font-ui);
+}
+.about-interests ul {
+  margin: 0;
+  padding-left: 1rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.about-footer {
+  margin-top: auto;
+}
+.about-footer-text {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--color-text-soft);
+}
+.about-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   12. SKILLS
+   -------------------------------------------------------------------------- */
+#skills {
+  background: var(--color-bg-alt);
+}
+[data-theme="dark"] #skills {
+  background: var(--color-bg);
+}
+
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  margin-top: 2rem;
+}
+.skill-group {
+  background: var(--color-surface);
+  padding: 1.3rem 1.2rem 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+}
+
+/* Dark: skill groups float on void */
+[data-theme="dark"] .skill-group {
+  background: transparent;
+  border-color: transparent;
+}
+[data-theme="dark"] .skill-group:hover {
+  border-color: transparent;
+}
+
+.skill-group h3 {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-soft);
+}
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.skill-badge {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.45rem 0.65rem;
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border-radius: 0; /* Anthropic: 0px badge radius */
+}
+
+/* Dark: pill badges with violet tint */
+[data-theme="dark"] .skill-badge {
+  background: rgba(128, 82, 255, 0.1);
+  color: var(--color-accent);
+  border-radius: var(--radius-pill);
+}
+
+.meter {
+  position: relative;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-top: 0.9rem;
+}
+.meter span {
+  position: absolute;
+  inset: 0;
+  width: var(--val, 50%);
+  background: var(--color-accent);
+  border-radius: var(--radius-pill);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.in-view .meter span {
+  transform: scaleX(1);
+}
+
+/* CSS stagger fallback */
+.skill-group.reveal:nth-child(1) {
+  --stagger: 0;
+}
+.skill-group.reveal:nth-child(2) {
+  --stagger: 1;
+}
+.skill-group.reveal:nth-child(3) {
+  --stagger: 2;
+}
+.skill-group.reveal:nth-child(4) {
+  --stagger: 3;
+}
+.skill-group.reveal:nth-child(5) {
+  --stagger: 4;
+}
+.skill-group.reveal:nth-child(6) {
+  --stagger: 5;
+}
+.skill-group.reveal:nth-child(7) {
+  --stagger: 6;
+}
+.skill-group.reveal:nth-child(8) {
+  --stagger: 7;
+}
+
+/* --------------------------------------------------------------------------
+   13. PROJECTS (Card Slider)
+   -------------------------------------------------------------------------- */
+#projects {
+  background: var(--color-bg);
+}
+
+.slider-wrapper {
+  position: relative;
+  margin-top: 2.4rem;
+  width: 100%;
+}
+.slider-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem 0.2rem 1.5rem;
+  width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-track .project-card {
+  flex: 0 0 calc(33.333% - 1rem);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* Arrow buttons */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+  z-index: 10;
+}
+.prev-btn {
+  left: -22px;
+}
+.next-btn {
+  right: -22px;
+}
+
+@media (max-width: 1320px) {
+  .prev-btn {
+    left: 4px;
+  }
+  .next-btn {
+    right: 4px;
+  }
+}
+
+.slider-btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  transform: translateY(-50%) scale(1.05);
+}
+.slider-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+.slider-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Dot indicators */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-border);
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
+  padding: 0;
+}
+.slider-dot.active {
+  background: var(--color-accent);
+  transform: scale(1.3);
+}
+.slider-dot:hover:not(.active) {
+  background: var(--color-text-soft);
+}
+
+/* Status badge on project image */
+.project-status-badge {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: #b45309;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.5px;
+  z-index: 1;
+  border: 1px solid rgba(180, 83, 9, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+[data-theme="dark"] .project-status-badge {
+  background: rgba(12, 11, 13, 0.75);
+  color: #ffb829;
+  border: 1px solid rgba(255, 184, 41, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Project cards */
+.project-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-base);
+  padding: 25px; /* Pushes the image and details inset, matching dark theme */
+}
+
+.project-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--project-media-radius);
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease;
+}
+.project-card:hover .project-media img {
+  transform: scale(1.05);
+}
+
+.project-body {
+  padding: 1.15rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 1;
+}
+.project-title {
+  margin: 0;
+  font-size: 1rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.project-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-soft);
+  font-family: var(--font-display);
+}
+[data-theme="dark"] .project-desc {
+  font-family: var(--font-ui);
+  font-weight: 200;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.tag {
+  font-family: var(--font-ui);
+  background: var(--color-bg-alt);
+  font-size: 0.65rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 0; /* Anthropic: badge radius 0 */
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--color-text);
+}
+[data-theme="dark"] .tag {
+  background: rgba(128, 82, 255, 0.1);
+  color: var(--color-accent);
+  border-radius: var(--radius-pill);
+}
+
+.project-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding-top: 0.3rem;
+}
+
+/* Project feature list (inside modals) */
+.project-features {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* Responsive slider breakpoints */
+@media (max-width: 1250px) {
+  .slider-track .project-card {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+}
+@media (max-width: 768px) {
+  .slider-track .project-card {
+    flex: 0 0 100%;
+  }
+  .slider-btn {
+    display: none;
+  }
+}
+
+/* CSS stagger */
+.project-card.reveal:nth-child(1) {
+  --stagger: 0;
+}
+.project-card.reveal:nth-child(2) {
+  --stagger: 1;
+}
+.project-card.reveal:nth-child(3) {
+  --stagger: 2;
+}
+.project-card.reveal:nth-child(4) {
+  --stagger: 3;
+}
+
+/* --------------------------------------------------------------------------
+   14. TIMELINE (EDUCATION)
+   -------------------------------------------------------------------------- */
+.timeline {
+  --line-width: 2px;
+  position: relative;
+  margin: 3.2rem auto 0;
+  max-width: 880px;
+  padding-left: 1rem;
+}
+
+/* Vertical line: Anthropic = Stone hairline; Dark = ultra-subtle */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 0;
+  width: var(--line-width);
+  height: 100%;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 2.2rem 3.85rem;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  top: 0.35rem;
+  left: 9px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  outline: 2px solid var(--color-accent);
+  transition: transform 0.3s;
+}
+.timeline-item:hover .timeline-marker {
+  transform: scale(1.25);
+}
+
+/* Light timeline content */
+.timeline-content {
+  background: var(--color-surface);
+  padding: 1.25rem 1.4rem 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+.timeline-item:hover .timeline-content {
+  transform: translateX(4px);
+}
+
+/* Dark: timeline content floats on void */
+[data-theme="dark"] .timeline-content {
+  background: transparent;
+  border: none;
+}
+[data-theme="dark"] .timeline-item:hover .timeline-content {
+  border: none;
+  transform: translateX(4px);
+}
+
+.timeline-content h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.timeline-meta {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  margin-bottom: 0.5rem;
+}
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  line-height: 1.5;
+  font-family: var(--font-display);
+}
+[data-theme="dark"] .timeline-desc {
+  font-family: var(--font-ui);
+  font-weight: 200;
+}
+
+/* CSS stagger */
+.timeline-item.reveal:nth-child(1) {
+  --stagger: 0;
+}
+.timeline-item.reveal:nth-child(2) {
+  --stagger: 1;
+}
+.timeline-item.reveal:nth-child(3) {
+  --stagger: 2;
+}
+.timeline-item.reveal:nth-child(4) {
+  --stagger: 3;
+}
+
+/* --------------------------------------------------------------------------
+   15. CONTACT & FORM
+   -------------------------------------------------------------------------- */
+#contact {
+  background: var(--color-bg-alt);
+}
+[data-theme="dark"] #contact {
+  background: var(--color-bg);
+}
+
+.contact-grid {
+  display: grid;
+  gap: clamp(2rem, 3vw, 3.2rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  margin-top: 2.4rem;
+  align-items: stretch; /* Cards stretch to match height */
+}
+@media (min-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 2fr 3fr; /* More balanced proportions on desktop */
+  }
+}
+.contact-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.5rem 2rem;
+  transition: border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark: panel floats on void */
+[data-theme="dark"] .contact-panel {
+  background: transparent;
+  border: none;
+}
+[data-theme="dark"] .contact-panel:hover {
+  border: none;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  justify-content: center; /* Center contents vertically to align with form card */
+}
+.detail-item {
+  display: flex;
+  gap: 0.95rem;
+  align-items: flex-start;
+}
+.detail-item i {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.detail-item:hover i {
+  transform: translateY(-2px);
+}
+
+.detail-item span {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+form.contact-form {
+  display: grid;
+  gap: 0.85rem;
+}
+@media (min-width: 640px) {
+  form.contact-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-field.full-width {
+    grid-column: span 2;
+  }
+  form.contact-form button[type="submit"],
+  form.contact-form .form-status {
+    grid-column: span 2;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.form-field label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+.form-field input,
+.form-field textarea {
+  font: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 0.8rem;
+  border-radius: var(--radius-sm);
+  resize: vertical;
+  min-height: 46px;
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base);
+}
+.form-field textarea {
+  min-height: 110px;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+/* Dark form inputs */
+[data-theme="dark"] .form-field input,
+[data-theme="dark"] .form-field textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-border);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+[data-theme="dark"] .form-field input:focus,
+[data-theme="dark"] .form-field textarea:focus {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.form-hint {
+  font-size: 0.65rem;
+  color: var(--color-text-soft);
+}
+
+/* Form status message */
+.form-status {
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   16. FOOTER
+   -------------------------------------------------------------------------- */
+
+/* Light: Anthropic dark footer — the only dark surface in light mode */
+footer {
+  padding: 2.6rem 0 2.2rem;
+  background: #141413;
+  position: relative;
+  margin-top: 0;
+}
+
+/* Dark: void footer */
+[data-theme="dark"] footer {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+}
+
+footer .foot-note {
+  margin-top: 1.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #b0aea5;
+}
+[data-theme="dark"] footer .foot-note {
+  color: var(--color-text-soft);
+}
+
+/* --- Footer Social Tooltips (Uiverse inspired) --- */
+.social-wrapper {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.social-wrapper .icon {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Ensure the link covers the entire circle */
+.social-wrapper .icon a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  border-radius: 50%;
+  transition: color 0.3s ease;
+}
+
+.social-wrapper .icon a i {
+  position: relative;
+  z-index: 2;
+}
+
+.social-wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #fff;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  white-space: nowrap;
+}
+
+.social-wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 6px;
+  width: 6px;
+  background: inherit;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.social-wrapper .icon:hover .tooltip {
+  top: -40px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Brand Hovers - Background and Tooltip colors */
+.social-wrapper .linkedin:hover,
+.social-wrapper .linkedin:hover .tooltip,
+.social-wrapper .linkedin:hover .tooltip::before {
+  background: #0077b5;
+  border-color: #0077b5;
+}
+
+.social-wrapper .github:hover,
+.social-wrapper .github:hover .tooltip,
+.social-wrapper .github:hover .tooltip::before {
+  background: #24292e;
+  border-color: #24292e;
+}
+
+/* Dark mode override for GitHub background color so it doesn't merge with page */
+[data-theme="dark"] .social-wrapper .github:hover,
+[data-theme="dark"] .social-wrapper .github:hover .tooltip,
+[data-theme="dark"] .social-wrapper .github:hover .tooltip::before {
+  background: #404448;
+  border-color: #404448;
+}
+
+.social-wrapper .instagram:hover,
+.social-wrapper .instagram:hover .tooltip,
+.social-wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  border-color: #e4405f;
+}
+
+/* Hover state transitions for links */
+.social-wrapper .icon:hover a {
+  color: #fff;
+}
+
+/* Glowing effects matching theme in dark mode */
+[data-theme="dark"] .social-wrapper .icon:not(:hover) {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .social-wrapper .linkedin:hover {
+  box-shadow: 0 0 15px rgba(0, 119, 181, 0.4);
+}
+[data-theme="dark"] .social-wrapper .github:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"] .social-wrapper .instagram:hover {
+  box-shadow: 0 0 15px rgba(228, 64, 95, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   17. BACK-TO-TOP BUTTON
+   -------------------------------------------------------------------------- */
+.back-to-top {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition-base);
+  z-index: 1200;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  transform: translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   18. REVEAL ANIMATIONS
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger, 0) * 0.08s);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Fast animation for section intros */
+.section-intro.reveal.in-view {
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhanced entrance for cards and images */
+.about-card.reveal,
+.about-img-frame.reveal,
+.project-card.reveal {
+  transform: translateY(36px) scale(0.96);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-card.reveal.in-view,
+.about-img-frame.reveal.in-view,
+.project-card.reveal.in-view {
+  transform: translateY(0) scale(1);
+}
+
+/* Subtle hover lift on about card — no shadow */
+.about-card.reveal.in-view:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. DIALOG / MODAL
+   -------------------------------------------------------------------------- */
+.dialog-modal {
+  width: min(640px, 90%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  opacity: 0;
+  transform: scale(0.92) translateY(12px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    overlay 0.25s ease allow-discrete,
+    display 0.25s ease allow-discrete;
+}
+[data-theme="dark"] .dialog-modal {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dialog-modal[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+@starting-style {
+  .dialog-modal[open] {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+}
+
+.dialog-modal::backdrop {
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s ease;
+}
+.dialog-modal[open]::backdrop {
+  background: rgba(20, 20, 19, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+@starting-style {
+  .dialog-modal[open]::backdrop {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+[data-theme="dark"] .dialog-modal::backdrop {
+  background: rgba(0, 0, 0, 0);
+}
+[data-theme="dark"] .dialog-modal[open]::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dialog-body {
+  padding: 1.75rem 2rem 2rem;
+}
+
+.dialog-body h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.dialog-body p {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+[data-theme="dark"] .dialog-body p {
+  font-family: var(--font-ui);
+  font-weight: 200;
+}
+.dialog-body ul {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+  padding-left: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text-soft);
+}
+[data-theme="dark"] .dialog-body ul {
+  font-family: var(--font-ui);
+  font-weight: 200;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.dialog-actions .btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Honeypot (visually hidden) */
+.sr-only {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   20. ACCESSIBILITY (REDUCED MOTION)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .meter span {
+    animation: none;
+    transform: scaleX(1);
+  }
+  .reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   21. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 920px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  /* No backdrop-filter — flat surfaces in both design systems */
+}
+
+@media (max-width: 768px) {
+  #about .about-wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .about-img-frame {
+    aspect-ratio: 3 / 4;
+    height: auto;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .timeline::before {
+    left: 12px;
+  }
+  .timeline-item {
+    padding-left: 3.4rem;
+  }
+  .timeline-marker {
+    left: 3px;
+  }
+}
+
+/* ==========================================================================
+   DEPOT DARK MODE OVERRIDES (About -> Contact)
+   ========================================================================== */
+
+/* 1. Flat Carbon Background & Hairline Dividers */
+[data-theme="dark"] #about,
+[data-theme="dark"] #skills,
+[data-theme="dark"] #projects,
+[data-theme="dark"] #education,
+[data-theme="dark"] #contact {
+  background-color: #04040b;
+  background-image: none;
+  border-top: 1px solid #2b292d;
+}
+
+/* 2. React Bits BorderGlow Cards */
+.about-card,
+.skill-group,
+.project-card,
+.timeline-content,
+.contact-panel {
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 25; /* Slightly tighter activation */
+  --color-sensitivity: 40; /* Tighter opacity ramp */
+  --border-radius: var(--radius-lg);
+  --glow-padding: 20px;
+  --cone-spread: 12; /* Concentrates the glow segment closer to the mouse cursor */
+  --card-bg: var(--color-surface); /* Ivory in light mode */
+  --project-media-radius: 12px; /* Smooth rounded corners for light mode project image */
+
+  /* Light Mode blend modes (normal instead of linear-add, so they don't wash out against white background) */
+  --glow-blend-mode: normal;
+  --bg-blend-mode: normal;
+  --bg-glow-opacity: 0; /* Fully disable background color bleed inside cards in light mode for readability */
+
+  /* Richer Light Mode Orange/Red Glow Colors */
+  --glow-color: hsl(15deg 90% 48% / 100%);
+  --glow-color-60: hsl(15deg 90% 48% / 60%);
+  --glow-color-50: hsl(15deg 90% 48% / 50%);
+  --glow-color-40: hsl(15deg 90% 48% / 40%);
+  --glow-color-30: hsl(15deg 90% 48% / 30%);
+  --glow-color-20: hsl(15deg 90% 48% / 20%);
+  --glow-color-10: hsl(15deg 90% 48% / 10%);
+
+  /* Dynamic Orange/Red Gradients */
+  --gradient-base: linear-gradient(#c2410c 0 100%);
+  --gradient-one: radial-gradient(at 80% 55%, #c2410c 0px, transparent 50%);
+  --gradient-two: radial-gradient(at 69% 34%, #ea580c 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%, #f97316 0px, transparent 50%);
+  --gradient-four: radial-gradient(at 41% 38%, #dc2626 0px, transparent 50%);
+  --gradient-five: radial-gradient(at 86% 85%, #991b1b 0px, transparent 50%);
+  --gradient-six: radial-gradient(at 82% 18%, #c2410c 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%, #ea580c 0px, transparent 50%);
+
+  position: relative;
+  border-radius: var(--border-radius);
+  isolation: isolate;
+  transform: translate3d(0, 0, 0.01px);
+  border: 1px solid rgba(204, 203, 200, 0.45); /* Subtle semi-transparent border */
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Dark Mode Variables Override */
+[data-theme="dark"] .about-card,
+[data-theme="dark"] .skill-group,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .timeline-content,
+[data-theme="dark"] .contact-panel {
+  --border-radius: 6px;
+  --card-bg: #121113;
+  --project-media-radius: 6px; /* Match dark mode's tighter card border radius */
+  --glow-blend-mode: plus-lighter;
+  --bg-blend-mode: soft-light;
+  --bg-glow-opacity: 0.5; /* Restore subtle interior glow bleed in dark mode */
+
+  --glow-color: hsl(40deg 80% 80% / 100%);
+  --glow-color-60: hsl(40deg 80% 80% / 60%);
+  --glow-color-50: hsl(40deg 80% 80% / 50%);
+  --glow-color-40: hsl(40deg 80% 80% / 40%);
+  --glow-color-30: hsl(40deg 80% 80% / 30%);
+  --glow-color-20: hsl(40deg 80% 80% / 20%);
+  --glow-color-10: hsl(40deg 80% 80% / 10%);
+
+  --gradient-base: linear-gradient(#c084fc 0 100%);
+  --gradient-one: radial-gradient(at 80% 55%, #c084fc 0px, transparent 50%);
+  --gradient-two: radial-gradient(at 69% 34%, #f472b6 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%, #38bdf8 0px, transparent 50%);
+  --gradient-four: radial-gradient(at 41% 38%, #c084fc 0px, transparent 50%);
+  --gradient-five: radial-gradient(at 86% 85%, #f472b6 0px, transparent 50%);
+  --gradient-six: radial-gradient(at 82% 18%, #38bdf8 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%, #f472b6 0px, transparent 50%);
+
+  border: 1px solid rgb(255 255 255 / 15%);
+  background: var(--card-bg);
+  padding: 25px; /* Keep original padding */
+  box-shadow: none;
+}
+
+/* =========================================================
+   Disable Edge Glow in Light Mode & Revert to Uniform Hover
+   ========================================================= */
+html:not([data-theme="dark"]) .about-card::before,
+html:not([data-theme="dark"]) .skill-group::before,
+html:not([data-theme="dark"]) .project-card::before,
+html:not([data-theme="dark"]) .timeline-content::before,
+html:not([data-theme="dark"]) .contact-panel::before,
+html:not([data-theme="dark"]) .about-card::after,
+html:not([data-theme="dark"]) .skill-group::after,
+html:not([data-theme="dark"]) .project-card::after,
+html:not([data-theme="dark"]) .timeline-content::after,
+html:not([data-theme="dark"]) .contact-panel::after,
+html:not([data-theme="dark"]) .about-card > .edge-light,
+html:not([data-theme="dark"]) .skill-group > .edge-light,
+html:not([data-theme="dark"]) .project-card > .edge-light,
+html:not([data-theme="dark"]) .timeline-content > .edge-light,
+html:not([data-theme="dark"]) .contact-panel > .edge-light {
+  display: none !important;
+}
+
+html:not([data-theme="dark"]) .about-card:hover,
+html:not([data-theme="dark"]) .skill-group:hover,
+html:not([data-theme="dark"]) .project-card:hover,
+html:not([data-theme="dark"]) .timeline-content:hover,
+html:not([data-theme="dark"]) .contact-panel:hover {
+  border-color: var(--color-accent);
+}
+
+/* Ensure contents stay above the layers */
+.about-card > *:not(.edge-light),
+.skill-group > *:not(.edge-light),
+.project-card > *:not(.edge-light),
+.timeline-content > *:not(.edge-light),
+.contact-panel > *:not(.edge-light) {
+  position: relative;
+  z-index: 1;
+}
+
+.about-card::before,
+.skill-group::before,
+.project-card::before,
+.timeline-content::before,
+.contact-panel::before,
+.about-card::after,
+.skill-group::after,
+.project-card::after,
+.timeline-content::after,
+.contact-panel::after,
+.about-card > .edge-light,
+.skill-group > .edge-light,
+.project-card > .edge-light,
+.timeline-content > .edge-light,
+.contact-panel > .edge-light {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: none; /* Removed 0.25s transition to eliminate hover latency */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Hover opacity control */
+.about-card:not(:hover)::before,
+.skill-group:not(:hover)::before,
+.project-card:not(:hover)::before,
+.timeline-content:not(:hover)::before,
+.contact-panel:not(:hover)::before,
+.about-card:not(:hover)::after,
+.skill-group:not(:hover)::after,
+.project-card:not(:hover)::after,
+.timeline-content:not(:hover)::after,
+.contact-panel:not(:hover)::after,
+.about-card:not(:hover) > .edge-light,
+.skill-group:not(:hover) > .edge-light,
+.project-card:not(:hover) > .edge-light,
+.timeline-content:not(:hover) > .edge-light,
+.contact-panel:not(:hover) > .edge-light {
+  opacity: 0;
+  transition: opacity 0.75s ease-in-out;
+}
+
+/* colored mesh-gradient border */
+.about-card::before,
+.skill-group::before,
+.project-card::before,
+.timeline-content::before,
+.contact-panel::before {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg) 0 100%) padding-box,
+    linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
+    var(--gradient-one) border-box,
+    var(--gradient-two) border-box,
+    var(--gradient-three) border-box,
+    var(--gradient-four) border-box,
+    var(--gradient-five) border-box,
+    var(--gradient-six) border-box,
+    var(--gradient-seven) border-box,
+    var(--gradient-base) border-box;
+
+  opacity: calc(
+    (var(--edge-proximity) - var(--color-sensitivity)) /
+      (100 - var(--color-sensitivity))
+  );
+
+  -webkit-mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black calc(var(--cone-spread) * 1%),
+    transparent calc((var(--cone-spread) + 15) * 1%),
+    transparent calc((100 - var(--cone-spread) - 15) * 1%),
+    black calc((100 - var(--cone-spread)) * 1%)
+  );
+  mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black calc(var(--cone-spread) * 1%),
+    transparent calc((var(--cone-spread) + 15) * 1%),
+    transparent calc((100 - var(--cone-spread) - 15) * 1%),
+    black calc((100 - var(--cone-spread)) * 1%)
+  );
+}
+
+/* colored mesh-gradient background fill near edges */
+.about-card::after,
+.skill-group::after,
+.project-card::after,
+.timeline-content::after,
+.contact-panel::after {
+  border: 1px solid transparent;
+  background:
+    var(--gradient-one) padding-box,
+    var(--gradient-two) padding-box,
+    var(--gradient-three) padding-box,
+    var(--gradient-four) padding-box,
+    var(--gradient-five) padding-box,
+    var(--gradient-six) padding-box,
+    var(--gradient-seven) padding-box,
+    var(--gradient-base) padding-box;
+
+  -webkit-mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(
+      from var(--cursor-angle) at center,
+      transparent 5%,
+      black 15%,
+      black 85%,
+      transparent 95%
+    );
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(
+      from var(--cursor-angle) at center,
+      transparent 5%,
+      black 15%,
+      black 85%,
+      transparent 95%
+    );
+
+  -webkit-mask-composite:
+    source-out, source-over, source-over, source-over, source-over, source-over;
+  mask-composite: subtract, add, add, add, add, add;
+  opacity: calc(
+    var(--bg-glow-opacity) *
+      (var(--edge-proximity) - var(--color-sensitivity)) /
+      (100 - var(--color-sensitivity))
+  );
+  mix-blend-mode: var(--bg-blend-mode);
+}
+
+/* outer glow layer */
+.about-card > .edge-light,
+.skill-group > .edge-light,
+.project-card > .edge-light,
+.timeline-content > .edge-light,
+.contact-panel > .edge-light {
+  inset: calc(var(--glow-padding) * -1);
+  pointer-events: none;
+  z-index: -1;
+
+  -webkit-mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black 2.5%,
+    transparent 10%,
+    transparent 90%,
+    black 97.5%
+  );
+  mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black 2.5%,
+    transparent 10%,
+    transparent 90%,
+    black 97.5%
+  );
+
+  opacity: calc(
+    (var(--edge-proximity) - var(--edge-sensitivity)) /
+      (100 - var(--edge-sensitivity))
+  );
+  mix-blend-mode: var(--glow-blend-mode);
+}
+
+.about-card > .edge-light::before,
+.skill-group > .edge-light::before,
+.project-card > .edge-light::before,
+.timeline-content > .edge-light::before,
+.contact-panel > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glow-color),
+    inset 0 0 1px 0 var(--glow-color-60),
+    inset 0 0 3px 0 var(--glow-color-50),
+    inset 0 0 6px 0 var(--glow-color-40),
+    inset 0 0 15px 0 var(--glow-color-30),
+    inset 0 0 25px 2px var(--glow-color-20),
+    inset 0 0 50px 2px var(--glow-color-10),
+    0 0 1px 0 var(--glow-color-60),
+    0 0 3px 0 var(--glow-color-50),
+    0 0 6px 0 var(--glow-color-40),
+    0 0 15px 0 var(--glow-color-30),
+    0 0 25px 2px var(--glow-color-20),
+    0 0 50px 2px var(--glow-color-10);
+}
+
+/* 4. Global Dark Mode Button Overrides (6px Radius) */
+[data-theme="dark"] .btn,
+[data-theme="dark"] .btn-outline {
+  border-radius: 6px;
+}
+
+/* 5. Global Dark Mode Typography Overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+  font-family: "Red Hat Display", sans-serif;
+  letter-spacing: -0.025em;
+}
+
+[data-theme="dark"] h1:not(.gradient-text),
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+  color: #e5e5e5;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"]
+  span:not(.skill-badge):not(.tag):not(.about-text-sm):not(.muted):not(
+    .hamburger span
+  ) {
+  font-family: "Red Hat Text", sans-serif;
+  letter-spacing: 0.025em;
+  color: #eeeef0;
+}
+
+[data-theme="dark"] .muted,
+[data-theme="dark"] .about-text-sm,
+[data-theme="dark"] .project-desc,
+[data-theme="dark"] .timeline-meta,
+[data-theme="dark"] .contact-details span,
+[data-theme="dark"] .hero-lead {
+  font-family: "Red Hat Text", sans-serif;
+  letter-spacing: 0.025em;
+  color: #7c7a85;
+}
+
+/* 6. Code & Badges */
+[data-theme="dark"] .skill-badge,
+[data-theme="dark"] .tag {
+  font-family: "Red Hat Mono", monospace;
+  background: #1b2a1e;
+  border: 1px solid #2d5736;
+  color: #71d083;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+/* 7. Dialog & Slider & Inputs */
+[data-theme="dark"] .dialog-modal {
+  background: rgba(
+    26,
+    25,
+    28,
+    0.85
+  ); /* Slightly brighter, translucent glass background */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Brighter border to catch the edge */
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(20px);
+}
+[data-theme="dark"] .dialog-body h3 {
+  font-family: "Red Hat Display", sans-serif;
+  color: #e5e5e5;
+  letter-spacing: -0.025em;
+}
+[data-theme="dark"] .dialog-body p,
+[data-theme="dark"] .dialog-body ul {
+  font-family: "Red Hat Text", sans-serif;
+  color: #eeeef0;
+  letter-spacing: 0.025em;
+}
+[data-theme="dark"] .dialog-actions .btn {
+  border-radius: 6px;
+}
+
+[data-theme="dark"] #projects .slider-btn {
+  background: #121113;
+  border: 1px solid #2b292d;
+  border-radius: 6px;
+  color: #eeeef0;
+}
+[data-theme="dark"] #projects .slider-btn:hover {
+  background: #232225;
+  border-color: #3c393f;
+}
+[data-theme="dark"] #contact .contact-form input,
+[data-theme="dark"] #contact .contact-form textarea {
+  background: #121113;
+  border: 1px solid #2b292d;
+  border-radius: 6px;
+  color: #eeeef0;
+  font-family: "Red Hat Text", sans-serif;
+}
+[data-theme="dark"] #contact .contact-form input:focus,
+[data-theme="dark"] #contact .contact-form textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+/* 4. Header Nav Links Hover (Match Depot Buttons) */
+[data-theme="dark"] .nav-links a {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin: 0 -0.2rem; /* adjust spacing to account for new padding */
+}
+
+[data-theme="dark"] .nav-links a:hover,
+[data-theme="dark"] .nav-links a:focus-visible,
+[data-theme="dark"] .nav-links a.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  text-shadow: none;
+}
+
+/* ==========================================================================
+   GLITCH EFFECT (Ported from React Bits)
+   ========================================================================== */
+.glitch-name {
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+}
+
+.glitch-name::after,
+.glitch-name::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  color: inherit;
+  background-color: var(--color-bg); /* Blend seamlessly with the header */
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  opacity: 0;
+  animation: none;
+  pointer-events: none;
+}
+
+.glitch-name.enable-on-hover:hover::after {
+  opacity: 1;
+  left: 2px; /* Scaled down from 10px for navbar text size */
+  text-shadow: -2px 0 red;
+  animation: animate-glitch 3s infinite linear alternate-reverse;
+}
+.glitch-name.enable-on-hover:hover::before {
+  opacity: 1;
+  left: -2px; /* Scaled down from -10px for navbar text size */
+  text-shadow: 2px 0 cyan;
+  animation: animate-glitch 2s infinite linear alternate-reverse;
+}
+
+@keyframes animate-glitch {
+  0% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  5% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  10% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  15% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  20% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  25% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  30% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  35% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  40% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  45% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  50% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  55% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  60% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  65% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  70% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  75% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  80% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  85% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  90% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  95% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  100% {
+    clip-path: inset(30% 0 40% 0);
+  }
+}
+
+/* ==========================================================================
+   TOUCH DEVICE / MOBILE EDGE-LIGHT OVERRIDES
+   ========================================================================== */
+@media (hover: none), (pointer: coarse), (max-width: 920px) {
+  /* 1. Disable the outer yellow glow entirely on mobile/touch */
+  .about-card > .edge-light,
+  .skill-group > .edge-light,
+  .project-card > .edge-light,
+  .timeline-content > .edge-light,
+  .contact-panel > .edge-light,
+  .about-card > .edge-light-bg,
+  .skill-group > .edge-light-bg,
+  .project-card > .edge-light-bg,
+  .timeline-content > .edge-light-bg,
+  .contact-panel > .edge-light-bg {
+    display: none !important;
+  }
+
+  /* 2. Unmask the colorful mesh gradients (::before and ::after) and hide them by default */
+  .about-card::before,
+  .about-card::after,
+  .skill-group::before,
+  .skill-group::after,
+  .project-card::before,
+  .project-card::after,
+  .timeline-content::before,
+  .timeline-content::after,
+  .contact-panel::before,
+  .contact-panel::after {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  /* 3. Show ONLY the sharp, colorful static border glow when tapped */
+  .about-card:active::before,
+  .about-card:focus-within::before,
+  .about-card:focus::before,
+  .skill-group:active::before,
+  .skill-group:focus-within::before,
+  .skill-group:focus::before,
+  .project-card:active::before,
+  .project-card:focus-within::before,
+  .project-card:focus::before,
+  .timeline-content:active::before,
+  .timeline-content:focus-within::before,
+  .timeline-content:focus::before,
+  .contact-panel:active::before,
+  .contact-panel:focus-within::before,
+  .contact-panel:focus::before {
+    opacity: 1 !important;
+  }
+
+  /* 4. Disable the inner diffused fill inside the card for mobile */
+  .about-card:active::after,
+  .about-card:focus-within::after,
+  .about-card:focus::after,
+  .skill-group:active::after,
+  .skill-group:focus-within::after,
+  .skill-group:focus::after,
+  .project-card:active::after,
+  .project-card:focus-within::after,
+  .project-card:focus::after,
+  .timeline-content:active::after,
+  .timeline-content:focus-within::after,
+  .timeline-content:focus::after,
+  .contact-panel:active::after,
+  .contact-panel:focus-within::after,
+  .contact-panel:focus::after {
+    opacity: 0 !important;
+  }
+}

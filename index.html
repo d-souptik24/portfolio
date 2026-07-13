@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en" class="no-js" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Souptik Dutta - Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Souptik Dutta — B.Sc. Physics graduate pursuing B.Tech in Information Technology. Projects, skills, and contact."
+    />
+    <meta
+      name="keywords"
+      content="Souptik Dutta, Portfolio, IT, Physics, MERN, Full-Stack, Developer, React, Flutter, Projects, Deep Learning"
+    />
+    <meta name="author" content="Souptik Dutta" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://d-souptik24.github.io/portfolio/" />
+    <meta
+      name="theme-color"
+      content="#000000"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f0eee6"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <link rel="icon" type="image/png" href="images/profile/sd-logo.png" />
+    <link rel="apple-touch-icon" href="images/profile/sd-logo.png" />
+
+    <meta property="og:title" content="Souptik Dutta - Portfolio" />
+    <meta
+      property="og:description"
+      content="B.Sc. Physics graduate pursuing B.Tech in Information Technology. Explore my projects, skills, and experience."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://d-souptik24.github.io/portfolio/"
+    />
+    <meta
+      property="og:image"
+      content="https://d-souptik24.github.io/portfolio/images/profile/og-preview.jpg"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Souptik Dutta - Portfolio" />
+    <meta
+      name="twitter:description"
+      content="B.Sc. Physics graduate now in B.Tech IT. Explore my skills and work."
+    />
+    <meta
+      name="twitter:image"
+      content="https://d-souptik24.github.io/portfolio/images/profile/og-preview.jpg"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200..800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&family=Red+Hat+Display:wght@400..700&family=Red+Hat+Text:wght@400..700&family=Red+Hat+Mono:wght@400&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200..800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&family=Red+Hat+Display:wght@400..700&family=Red+Hat+Text:wght@400..700&family=Red+Hat+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Souptik Dutta",
+        "url": "https://d-souptik24.github.io/portfolio/",
+        "jobTitle": "Aspiring Full-Stack Developer",
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Calcutta"
+          }
+        ],
+        "knowsAbout": ["MERN Stack", "Flutter", "Deep Learning", "IoT", "GCP", "Docker"],
+        "sameAs": [
+          "https://github.com/d-souptik24",
+          "https://www.linkedin.com/in/souptik-dutta-3895512a4",
+          "https://www.instagram.com/d_souptik24"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container nav-bar">
+        <a href="#hero" class="branding" aria-label="Home">
+          <img src="images/profile/sd-logo.png" alt="Souptik Dutta Logo" />
+          <span class="glitch-name enable-on-hover" data-text="Souptik Dutta"
+            >Souptik Dutta</span
+          >
+        </a>
+        <nav aria-label="Primary">
+          <ul class="nav-links" role="menubar">
+            <li><a href="#hero" class="active" role="menuitem">Home</a></li>
+            <li><a href="#about" role="menuitem">About</a></li>
+            <li><a href="#skills" role="menuitem">Skills</a></li>
+            <li><a href="#projects" role="menuitem">Projects</a></li>
+            <li><a href="#education" role="menuitem">Education</a></li>
+            <li><a href="#contact" role="menuitem">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          class="theme-toggle"
+          aria-label="Toggle dark mode"
+          title="Toggle theme"
+        >
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+        <button
+          class="hamburger"
+          type="button"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="mobileNav"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav id="mobileNav" class="mobile-menu" aria-hidden="true">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1 class="gradient-text">Hi, I'm Souptik Dutta</h1>
+          <p class="hero-lead">
+            B.Sc. Physics graduate evolving into
+            <span class="typing" aria-live="polite"></span>. I love coding,
+            solving problems, and building solutions that bridge analytical
+            thinking with modern technology.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-outline"
+              ><i class="fa-solid fa-diagram-project"></i> View Projects</a
+            >
+            <a href="#contact" class="btn btn-outline"
+              ><i class="fa-solid fa-paper-plane"></i> Get In Touch</a
+            >
+            <a
+              href="https://drive.google.com/file/d/11wgqvtYnDHW5FHmaIbB24B70RMqQ3CFU/view?usp=drive_link"
+              class="btn btn-outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fa-solid fa-file-arrow-down"></i> Resume</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h2 class="section-title">About Me</h2>
+          <p class="muted">
+            A journey from Physics fundamentals to software engineering
+            craftsmanship.
+          </p>
+        </div>
+        <div class="about-wrap">
+          <div class="about-img-frame reveal">
+            <picture>
+              <source
+                srcset="images/profile/souptik-dutta.webp"
+                type="image/webp"
+              />
+              <img
+                src="images/profile/souptik-dutta.png"
+                alt="Souptik Dutta portrait"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <div class="about-card reveal" tabindex="0">
+            <div>
+              <p class="about-text">
+                Hello! I'm <strong>Souptik Dutta</strong>, a B.Sc. Physics
+                (Honours) graduate currently in my final year of B.Tech in
+                Information Technology at the University of Calcutta (Class of
+                2027). My scientific foundation trained me to think
+                analytically, and my shift to IT lets me visualise and build
+                what I study.
+              </p>
+
+              <p class="about-text-sm">
+                This transition gave me <em>analytical depth</em> from Physics
+                and <em>hands-on implementation skills</em> from IT. I build and
+                deploy full-stack web applications using the MERN stack, Docker,
+                and GCP, and have hands-on experience integrating deep learning
+                inference pipelines with IoT hardware.
+              </p>
+            </div>
+
+            <div class="about-interests">
+              <h4>I'm especially interested in:</h4>
+              <ul>
+                <li>Full-stack web development (MERN)</li>
+                <li>Mobile app development (Flutter)</li>
+                <li>Machine Learning & Applied AI</li>
+                <li>Cloud Computing & DevOps (GCP, Docker, Firebase)</li>
+              </ul>
+            </div>
+
+            <div class="about-footer">
+              <p class="about-footer-text" style="margin-bottom: 0">
+                Outside coursework, I enjoy tackling DSA challenges on LeetCode,
+                exploring emerging technologies, and learning how AI/ML can
+                solve real-world problems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h2 class="section-title">Skills</h2>
+          <p class="muted">
+            An evolving toolkit shaped by curiosity, experimentation, and
+            consistent practice.
+          </p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-code"></i> Web Fundamentals</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">HTML5</span>
+              <span class="skill-badge">CSS3</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">React</span>
+              <span class="skill-badge">EJS</span>
+            </div>
+            <div class="meter" style="--val: 85%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-laptop-code"></i> Programming</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">Java</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">Dart</span>
+              <span class="skill-badge">C++</span>
+              <span class="skill-badge">SQL</span>
+            </div>
+            <div class="meter" style="--val: 80%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-database"></i> Data & Persistence</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">MongoDB</span>
+              <span class="skill-badge">MySQL</span>
+              <span class="skill-badge">Firestore</span>
+              <span class="skill-badge">NoSQL</span>
+            </div>
+            <div class="meter" style="--val: 65%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-server"></i> Backend / APIs</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">Node.js</span>
+              <span class="skill-badge">Express.js</span>
+              <span class="skill-badge">Flask</span>
+              <span class="skill-badge">RESTful APIs</span>
+            </div>
+            <div class="meter" style="--val: 65%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-microchip"></i> Embedded & Hardware</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">Arduino</span>
+              <span class="skill-badge">ESP-32</span>
+              <span class="skill-badge">IoT</span>
+              <span class="skill-badge">Sensors</span>
+            </div>
+            <div class="meter" style="--val: 70%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-cloud"></i> Cloud & Tools</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">GCP</span>
+              <span class="skill-badge">Cloud Run</span>
+              <span class="skill-badge">Docker</span>
+              <span class="skill-badge">Git</span>
+              <span class="skill-badge">GitHub</span>
+            </div>
+            <div class="meter" style="--val: 60%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3>
+              <i class="fa-solid fa-mobile-screen"></i> Mobile Development
+            </h3>
+            <div class="skill-badges">
+              <span class="skill-badge">Flutter</span>
+              <span class="skill-badge">Dart</span>
+              <span class="skill-badge">Firebase</span>
+            </div>
+            <div class="meter" style="--val: 60%"><span></span></div>
+          </div>
+          <div class="skill-group reveal" tabindex="0">
+            <h3><i class="fa-solid fa-graduation-cap"></i> Core CS</h3>
+            <div class="skill-badges">
+              <span class="skill-badge">DSA</span>
+              <span class="skill-badge">OOP</span>
+              <span class="skill-badge">DBMS</span>
+              <span class="skill-badge">Computer Networks</span>
+            </div>
+            <div class="meter" style="--val: 75%"><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h2 class="section-title">Projects</h2>
+          <p class="muted">
+            Practical builds reflecting applied learning and curiosity.
+          </p>
+        </div>
+
+        <div class="slider-wrapper">
+          <button class="slider-btn prev-btn" aria-label="Previous project">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="slider-track">
+            <!-- Card 1: CivicPulse -->
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-media">
+                <img
+                  src="images/project-imgs/poject2_civicpulse.webp"
+                  alt="CivicPulse — Hyperlocal Civic Issue Tracker"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">CivicPulse — Civic Issue Tracker</h3>
+                <p class="project-desc">
+                  An AI-powered civic reporting platform built during the
+                  Vibe2Ship Hackathon (Coding Ninjas × Google Cloud). Citizens
+                  report geo-tagged issues with photos; 5 autonomous Gemini AI
+                  pipelines categorize, deduplicate, escalate, and verify
+                  resolutions in real time.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express</span>
+                  <span class="tag">Firestore</span>
+                  <span class="tag">Cloud Run</span>
+                  <span class="tag">Docker</span>
+                  <span class="tag">Gemini AI</span>
+                </div>
+                <div class="project-actions">
+                  <button class="btn btn-outline" data-modal="projCivicPulse">
+                    <i class="fa-solid fa-circle-info"></i> Details
+                  </button>
+                  <a
+                    href="https://github.com/d-souptik24/civic-pulse"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline"
+                    ><i class="fa-brands fa-github"></i> Source</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 2: ECG Digitalization -->
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-media">
+                <img
+                  src="images/project-imgs/project3_ECG_DIGITALIZATION.webp"
+                  alt="ECG Digitalization System"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">ECG Digitalization System</h3>
+                <p class="project-desc">
+                  An end-to-end pipeline that converts scanned paper ECG
+                  printouts into structured 12-lead digital time-series data
+                  using a deep learning ensemble model, served through an ESP-32
+                  CAM + Flask + Flutter stack.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Flutter</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">Deep Learning</span>
+                  <span class="tag">ESP-32 CAM</span>
+                  <span class="tag">PyTorch</span>
+                  <span class="tag">Dart</span>
+                </div>
+                <div class="project-actions">
+                  <button class="btn btn-outline" data-modal="projECG">
+                    <i class="fa-solid fa-circle-info"></i> Details
+                  </button>
+                  <a
+                    href="https://github.com/d-souptik24/ECG-DIGITALIZATION"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline"
+                    ><i class="fa-brands fa-github"></i> Source</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 3: Wanderlust (Airbnb Clone) -->
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-media">
+                <img
+                  src="images/project-imgs/project4_wanderlust.webp"
+                  alt="Wanderlust — Airbnb Clone"
+                  loading="lazy"
+                />
+                <span class="project-status-badge">🚧 In Progress</span>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Wanderlust — Airbnb Clone</h3>
+                <p class="project-desc">
+                  A full-stack property listing and rental platform with an
+                  Express/Node.js backend, MongoDB for data persistence, and EJS
+                  server-side templating. Implementing authentication, image
+                  upload, and review features.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express.js</span>
+                  <span class="tag">MongoDB</span>
+                  <span class="tag">Mongoose</span>
+                  <span class="tag">EJS</span>
+                </div>
+                <div class="project-actions">
+                  <button class="btn btn-outline" data-modal="projWanderlust">
+                    <i class="fa-solid fa-circle-info"></i> Details
+                  </button>
+                  <a
+                    href="https://github.com/d-souptik24/Wanderlust"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline"
+                    ><i class="fa-brands fa-github"></i> Source</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 4: Arduino Temperature Monitoring -->
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-media">
+                <img
+                  src="images/project-imgs/project1_temp_sensor.webp"
+                  alt="Arduino Temperature Monitoring Prototype"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">
+                  Arduino Temperature Monitoring Prototype
+                </h3>
+                <p class="project-desc">
+                  A temperature-sensing prototype built with an NTC thermistor,
+                  calibrated using the Steinhart–Hart equation. Threshold-based
+                  LED indicators and a buzzer provide real-time visual and
+                  audible alerts.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Arduino Uno</span>
+                  <span class="tag">C++</span>
+                  <span class="tag">NTC Thermistor</span>
+                  <span class="tag">Steinhart–Hart</span>
+                  <span class="tag">Analog Sensing</span>
+                  <span class="tag">Digital I/O</span>
+                </div>
+                <div class="project-actions">
+                  <button class="btn btn-outline" data-modal="proj1Details">
+                    <i class="fa-solid fa-circle-info"></i> Details
+                  </button>
+                  <a
+                    href="https://github.com/d-souptik24/ArduinoProject"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline"
+                    ><i class="fa-brands fa-github"></i> Source</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <button class="slider-btn next-btn" aria-label="Next project">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="slider-dots"></div>
+      </div>
+    </section>
+
+    <!-- ── Project Modals ────────────────────────────────────────────────────── -->
+
+    <dialog id="projCivicPulse" class="dialog-modal">
+      <form method="dialog" class="dialog-body">
+        <h3 tabindex="-1" autofocus>
+          CivicPulse — Hyperlocal Civic Issue Tracker
+        </h3>
+        <p>
+          A production-grade, AI-powered civic platform built in an 8-day sprint
+          during the Vibe2Ship Hackathon (Coding Ninjas × Google Cloud).
+          Citizens identify, report, validate, track, and resolve hyperlocal
+          community issues through collaboration and intelligent automation.
+        </p>
+        <ul>
+          <li>
+            5 Agentic AI pipelines powered by Gemini 3.1 Flash Lite — Vision
+            Categorizer, Geo-Deduplication, Hotspot Mapper, Escalation Agent,
+            and Resolution Verifier
+          </li>
+          <li>
+            Location-based duplicate detection using Geohash radius queries
+            within 200 m
+          </li>
+          <li>
+            Deployed to Google Cloud Run via multi-stage Docker build with
+            secure env.yaml injection
+          </li>
+          <li>
+            Firebase Auth (Google Sign-in), Firestore real-time listeners,
+            Firebase Storage for issue photos
+          </li>
+          <li>
+            Gamification system with points, badges, leaderboard, and confetti
+            animations
+          </li>
+        </ul>
+        <div class="dialog-actions">
+          <a
+            href="https://github.com/d-souptik24/civic-pulse"
+            target="_blank"
+            class="btn btn-outline"
+            rel="noopener"
+            ><i class="fa-brands fa-github"></i> Repository</a
+          >
+          <button class="btn btn-outline" value="cancel">
+            <i class="fa-solid fa-xmark"></i> Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="projECG" class="dialog-modal">
+      <form method="dialog" class="dialog-body">
+        <h3 tabindex="-1" autofocus>ECG Digitalization System</h3>
+        <p>
+          An end-to-end system that photographs paper ECG printouts,
+          reconstructs the original 12-lead time-series signal using a deep
+          learning ensemble, and displays clinical-grade plots on a Flutter app.
+          Designed to digitize legacy hospital archives in resource-limited
+          clinics.
+        </p>
+        <ul>
+          <li>
+            3-stage deep learning pipeline: homography normalization
+            (Stage0Net), grid-warp rectification (Stage1Net), EfficientNet
+            ensemble digitization with TTA (Stage2)
+          </li>
+          <li>
+            ESP-32 CAM module for autonomous image capture with OLED status
+            display and 3-retry upload logic
+          </li>
+          <li>
+            Flask backend with async processing (~5–8 min on CPU), status
+            polling, and server-rendered Matplotlib clinical plots
+          </li>
+          <li>
+            Flutter app with Riverpod state management, hybrid local + server
+            record history, and GoRouter navigation
+          </li>
+        </ul>
+        <div class="dialog-actions">
+          <a
+            href="https://github.com/d-souptik24/ECG-DIGITALIZATION"
+            target="_blank"
+            class="btn btn-outline"
+            rel="noopener"
+            ><i class="fa-brands fa-github"></i> Repository</a
+          >
+          <button class="btn btn-outline" value="cancel">
+            <i class="fa-solid fa-xmark"></i> Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="projWanderlust" class="dialog-modal">
+      <form method="dialog" class="dialog-body">
+        <h3 tabindex="-1" autofocus>Wanderlust — Airbnb Clone</h3>
+        <p>
+          A full-stack property listing and rental marketplace following MVC
+          architecture. The project is actively being developed with a working
+          CRUD engine for listings, seed data for realistic testing, and
+          structured templates for a polished server-rendered experience.
+        </p>
+        <ul>
+          <li>
+            Full CRUD lifecycle for property listings — create, browse, view
+            details, edit, and delete
+          </li>
+          <li>
+            MongoDB + Mongoose schema with timestamps, image data, pricing, and
+            location fields
+          </li>
+          <li>
+            MVC architecture with EJS layout inheritance via ejs-mate and
+            reusable partials
+          </li>
+          <li>
+            Bootstrap 5 responsive UI with shared navbar, footer, and card grid
+            layout
+          </li>
+          <li>
+            Seed data script for repeatable database initialization with
+            realistic listings
+          </li>
+        </ul>
+        <div class="dialog-actions">
+          <a
+            href="https://github.com/d-souptik24/Wanderlust"
+            target="_blank"
+            class="btn btn-outline"
+            rel="noopener"
+            ><i class="fa-brands fa-github"></i> Repository</a
+          >
+          <button class="btn btn-outline" value="cancel">
+            <i class="fa-solid fa-xmark"></i> Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="proj1Details" class="dialog-modal">
+      <form method="dialog" class="dialog-body">
+        <h3 tabindex="-1" autofocus>
+          Arduino Temperature Monitoring Prototype
+        </h3>
+        <p>
+          A working prototype that reads ambient temperature through an NTC
+          thermistor and converts the analog signal to accurate Celsius values
+          using the Steinhart–Hart equation. Hard-coded temperature thresholds
+          drive a tri-colour LED indicator system and an audible buzzer for
+          critical alerts.
+        </p>
+        <ul>
+          <li>Studied the NTC thermistor's temperature–resistance curve</li>
+          <li>Implemented Steinhart–Hart calibration for accurate readings</li>
+          <li>
+            Green / Yellow / Red LEDs for normal, warm &amp; critical ranges
+          </li>
+          <li>
+            Buzzer activates when temperature crosses the critical threshold
+          </li>
+          <li>
+            Full control logic in C++, developed &amp; uploaded via Arduino IDE
+          </li>
+        </ul>
+        <div class="dialog-actions">
+          <a
+            href="https://github.com/d-souptik24/ArduinoProject"
+            target="_blank"
+            class="btn btn-outline"
+            rel="noopener"
+            ><i class="fa-brands fa-github"></i> Repository</a
+          >
+          <button class="btn btn-outline" value="cancel">
+            <i class="fa-solid fa-xmark"></i> Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h2 class="section-title">Education</h2>
+          <p class="muted">
+            Academic foundation shaping structured thinking & analytical rigor.
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content" tabindex="0">
+              <div class="timeline-meta">2024 - 2027 · Present</div>
+              <h3>B.Tech - Information Technology</h3>
+              <p class="timeline-desc">
+                <strong>University:</strong> University of Calcutta<br />
+                <strong>CGPA:</strong> 8.40 (Till 5th Semester)<br />
+                Focusing on DSA, DBMS, full-stack development (MERN), Flutter,
+                Flask, and cloud technologies (GCP, Docker, Firebase). Solved
+                100+ problems on LeetCode. Completed an Oracle AI/ML foundation
+                course.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content" tabindex="0">
+              <div class="timeline-meta">2020 - 2023</div>
+              <h3>B.Sc. - Physics (Honours)</h3>
+              <p class="timeline-desc">
+                <strong>University:</strong> University of Calcutta<br />
+                <strong>CGPA:</strong> 7.53<br />
+                Developed strong analytical reasoning and computational
+                thinking. Learned Python with Matplotlib, basic &amp; advanced
+                electronics, and built an Arduino-based project in C++.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content" tabindex="0">
+              <div class="timeline-meta">2016 - 2018</div>
+              <h3>Higher Secondary Education</h3>
+              <p class="timeline-desc">
+                <strong>School:</strong> Adamas Higher Secondary Model School<br />
+                <strong>Board:</strong> WBCHSE &nbsp;|&nbsp;
+                <strong>Result:</strong> 74.60%<br />
+                Science stream — Physics, Chemistry, Mathematics &amp; Biology.
+                Established core academic discipline.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content" tabindex="0">
+              <div class="timeline-meta">2016</div>
+              <h3>Secondary Education</h3>
+              <p class="timeline-desc">
+                <strong>School:</strong> Arit Vivekananda Vidyamandir<br />
+                <strong>Board:</strong> WBBSE &nbsp;|&nbsp;
+                <strong>Result:</strong> 83.42%<br />
+                Completed foundation-level academics with strong performance in
+                STEM subjects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="muted">
+            Open to internships, collaborative builds, and impactful learning
+            opportunities.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-panel reveal" tabindex="0">
+            <div class="contact-details">
+              <div class="detail-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                  <strong>Email</strong><br />
+                  <span
+                    ><a href="mailto:duttasouptik0@gmail.com"
+                      >duttasouptik0@gmail.com</a
+                    ></span
+                  >
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Location</strong><br />
+                  <span>Kolkata, India</span>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-user"></i>
+                <div>
+                  <strong>Profiles</strong><br />
+                  <span>
+                    <a
+                      href="https://github.com/d-souptik24"
+                      target="_blank"
+                      rel="noopener"
+                      >GitHub</a
+                    >
+                    ·
+                    <a
+                      href="https://www.linkedin.com/in/souptik-dutta-3895512a4"
+                      target="_blank"
+                      rel="noopener"
+                      >LinkedIn</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-panel reveal" tabindex="0">
+            <form
+              class="contact-form"
+              id="contactForm"
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              novalidate
+            >
+              <input
+                type="hidden"
+                name="access_key"
+                value="557c8fe1-0cd9-4d5b-8c11-7dc33b92f6d2"
+              />
+              <input
+                type="hidden"
+                name="_subject"
+                value="New Contact Form Submission from Portfolio"
+              />
+              <input
+                type="hidden"
+                name="from_name"
+                value="Portfolio Contact Form"
+              />
+              <input
+                type="checkbox"
+                name="botcheck"
+                class="sr-only"
+                tabindex="-1"
+                autocomplete="off"
+              />
+
+              <div class="form-field">
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Your Name"
+                  autocomplete="name"
+                />
+                <span class="form-hint">Required</span>
+              </div>
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+                <span class="form-hint">We'll never share your email.</span>
+              </div>
+              <div class="form-field full-width">
+                <label for="subject">Subject</label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="Subject (optional)"
+                />
+              </div>
+              <div class="form-field full-width">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Your message..."
+                ></textarea>
+                <span class="form-hint">Minimum 10 characters.</span>
+              </div>
+              <button type="submit" class="btn btn-outline" id="submitBtn">
+                <i class="fa-solid fa-paper-plane"></i> Send Message
+              </button>
+              <p id="formStatus" class="form-status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container center reveal">
+        <ul class="social-wrapper">
+          <li class="icon linkedin">
+            <span class="tooltip">LinkedIn</span>
+            <a
+              href="https://www.linkedin.com/in/souptik-dutta-3895512a4"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </li>
+          <li class="icon github">
+            <span class="tooltip">GitHub</span>
+            <a
+              href="https://github.com/d-souptik24"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+          </li>
+          <li class="icon instagram">
+            <span class="tooltip">Instagram</span>
+            <a
+              href="https://www.instagram.com/d_souptik24"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </li>
+        </ul>
+        <div class="foot-note">
+          &copy; 2026 Souptik Dutta. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+    <button
+      class="back-to-top"
+      id="backToTop"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/hero-canvas.js"></script>
+  </body>
+</html>
