@@ -1328,7 +1328,7 @@ form.contact-form {
 }
 @media (min-width: 640px) {
   form.contact-form {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .form-field.full-width {
     grid-column: span 2;
@@ -1336,6 +1336,7 @@ form.contact-form {
   form.contact-form button[type="submit"],
   form.contact-form .form-status {
     grid-column: span 2;
+    width: 100%;
   }
 }
 
@@ -1355,6 +1356,7 @@ form.contact-form {
 .form-field input,
 .form-field textarea {
   font: inherit;
+  width: 100%;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   padding: 0.75rem 0.8rem;
