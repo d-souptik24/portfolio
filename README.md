@@ -23,7 +23,7 @@
 
 ## 🌟 About the Portfolio
 
-This repository contains the source code for my personal portfolio website. It serves as a digital resume and a central hub for my software engineering projects, illustrating my journey from a Physics background into the world of Information Technology. The site is built from scratch without heavy frameworks, emphasizing performance, clean code, and a premium user experience.
+This repository contains the source code for my personal portfolio website. It serves as a digital resume and a central hub for my software engineering projects, illustrating my journey from a Physics background into the world of Information Technology. The live portfolio is available at https://d-souptik24.github.io/portfolio/ for quick access. The site is built from scratch without heavy frameworks, emphasizing performance, clean code, and a premium user experience.
 
 ## 🛠️ Tech Stack
 
@@ -72,7 +72,7 @@ The portfolio highlights some of my most significant builds:
 ## 📬 Connect With Me
 
 - **Email:** [duttasouptik0@gmail.com](mailto:duttasouptik0@gmail.com)
-- **LinkedIn:** [Souptik Dutta](https://www.linkedin.com/in/souptik-dutta-3895512a4)
+- **LinkedIn:** [Souptik Dutta](https://www.linkedin.com/in/souptik-dutta/)
 - **GitHub:** [@d-souptik24](https://github.com/d-souptik24)
 
 <br>
