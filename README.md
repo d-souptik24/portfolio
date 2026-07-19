@@ -23,7 +23,11 @@
 
 ## 🌟 About the Portfolio
 
-This repository contains the source code for my personal portfolio website. It serves as a digital resume and a central hub for my software engineering projects, illustrating my journey from a Physics background into the world of Information Technology. The live portfolio is available at https://d-souptik24.github.io/portfolio/ for quick access. The site is built from scratch without heavy frameworks, emphasizing performance, clean code, and a premium user experience.
+This repository contains the source code for my personal portfolio website. It serves as a digital resume and a central hub for my software engineering projects, illustrating my journey from a Physics background into the world of Information Technology. The site is built from scratch without heavy frameworks, emphasizing performance, clean code, and a premium user experience.
+
+## 🔗 Live Portfolio
+
+✨ **https://d-souptik24.github.io/portfolio/** ✨
 
 ## 🛠️ Tech Stack
 
